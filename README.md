@@ -9,10 +9,30 @@ Common scenarios include:
 * Batch creates\updates\deletes through an ORM (ActiveRecord, DataMapper, Mongoid, anything that accepts hashes for a given record)
 
 ## Usage
-
+First,
 ```ruby
 require 'batch_factory'
+hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls'
 ```
+
+Then, display headings from row 1 that BatchFactory used as hash keys for each row:
+```ruby
+hash_worksheet.keys
+```
+
+Show all extracted hashes (one per row starting with row 2):
+```ruby
+hash_worksheet.rows
+```
+
+Iterate over it like an array (or enumerable). Or, in fact, any method that either respond to:
+```ruby
+hash_worksheet.each do |hash_row|
+  puts hash_row.inspect
+end
+```
+
+Note: this gem pulls in Activesupport's indefferent access for hashes, so you can access each row's data with Symbols just like Strings. Enjoy.
 
 ## Installation
 
