@@ -44,7 +44,7 @@ module BatchFactory
           end
         end
         
-        @row_hashes << hash
+        @row_hashes << hash unless hash.empty?
       end
     end
     
