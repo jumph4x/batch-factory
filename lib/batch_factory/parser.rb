@@ -39,12 +39,21 @@ module BatchFactory
         
         for cell_index in @column_bounds[0]..@column_bounds[1]
           if key = @heading_keys[cell_index] and
-             value = row[cell_index]
-            hash[key] = value.to_s.strip if value.present?
+            value = row[cell_index]
+            
+            hash[key] = sanitize_value value if value.present?
           end
         end
         
         @row_hashes << hash unless hash.empty?
+      end
+    end
+    
+    def sanitize_value value
+      if value.is_a? Spreadsheet::Formula
+        value.value
+      else
+        value.to_s.strip
       end
     end
     
