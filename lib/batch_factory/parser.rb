@@ -8,9 +8,8 @@ module BatchFactory
       @row_hashes = []
     end
   
-    def open file_location
-      workbook = Spreadsheet.open File.open(file_location)
-      @worksheet = workbook.worksheet(0)
+    def open(file_location, sheet_number = 0)
+      @worksheet = SpreadsheetDocument.new(file_location, sheet_number)
     end
     
     def parse!
@@ -22,38 +21,32 @@ module BatchFactory
     end
     
     def parse_heading_keys
-      @heading_keys = worksheet.row(0).map do |key|
+      @heading_keys = worksheet.row(worksheet.first_row).map do |key|
         key.blank? ? nil : key.strip
       end
     end
     
     def parse_column_bounds
-      @column_bounds = [@worksheet.dimensions[2], @worksheet.dimensions[3]-1]
+      @column_bounds = @worksheet.first_column..@worksheet.last_column
     end
     
     def parse_data_rows
       @row_hashes = []
       
-      worksheet.each(1) do |row|
+      rows_range = (worksheet.first_row+1..worksheet.last_row)
+      rows_range.each do |idx|
+        row = worksheet.row(idx)
         hash = HashWithIndifferentAccess.new
         
-        for cell_index in @column_bounds[0]..@column_bounds[1]
+        for cell_index in @column_bounds
           if key = @heading_keys[cell_index] and
             value = row[cell_index]
             
-            hash[key] = sanitize_value value if value.present?
+            hash[key] = value if value.present?
           end
         end
         
         @row_hashes << hash unless hash.empty?
-      end
-    end
-    
-    def sanitize_value value
-      if value.is_a? Spreadsheet::Formula
-        value.value
-      else
-        value.to_s.strip
       end
     end
     

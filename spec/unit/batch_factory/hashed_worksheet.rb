@@ -15,7 +15,7 @@ describe BatchFactory::HashedWorksheet do
     end
     
     it 'should return an array of data hashes' do
-      worksheet.rows[0][:age].should == '50'
+      worksheet.rows[0][:age].should == 50
     end
     
     it 'should iterate over the rows' do

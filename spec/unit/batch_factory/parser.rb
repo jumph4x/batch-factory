@@ -9,14 +9,14 @@ describe BatchFactory::Parser do
       parser.worksheet.should_not be_nil
     end
     
-    context 'when parsing' do
+    context 'when parsing default worksheet' do
       before do
         parser.open VALID_SPREADSHEET
         parser.parse!
       end
       
       it 'should parse column information' do
-        parser.column_bounds.should == [0,5]
+        parser.column_bounds.should == (1..6)
       end
       
       it 'should parse the heading keys' do
@@ -24,7 +24,7 @@ describe BatchFactory::Parser do
       end
       
       it 'should parse the data rows' do
-        parser.row_hashes[0]['age'].should == '50'
+        parser.row_hashes[0]['age'].should == 50
         parser.row_hashes.size.should == 1
       end
       
@@ -34,6 +34,33 @@ describe BatchFactory::Parser do
         worksheet.keys.should == parser.heading_keys
       end
     end
+
+    context 'when parsing second worksheet' do
+      before do
+        parser.open VALID_SPREADSHEET, 1
+        parser.parse!
+      end
+      
+      it 'should parse column information' do
+        parser.column_bounds.should == (3..8)
+      end
+      
+      it 'should parse the heading keys' do
+        parser.heading_keys.should == ['name', 'address', nil, 'country', 'bid', 'age']
+      end
+      
+      it 'should parse the data rows' do
+        parser.row_hashes[0]['age'].should == 50
+        parser.row_hashes.size.should == 1
+      end
+      
+      it 'should return a hashed worksheet' do
+        worksheet = parser.hashed_worksheet
+        worksheet.rows.should == parser.row_hashes
+        worksheet.keys.should == parser.heading_keys
+      end
+    end
+
     
   end
   
