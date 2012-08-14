@@ -1,6 +1,6 @@
 # Batch Factory
 
-Built on top of the Spreadsheet gem by Zeno R.R. Davatz for easy abstraction of Excel spreadsheets as tabular data input. Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys. 
+Built on top of the roo gem for easy abstraction of Excel and OpenOffice spreadsheets as tabular data input. Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys. 
 
 ## Uses
 
