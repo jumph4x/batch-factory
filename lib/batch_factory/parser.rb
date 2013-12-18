@@ -27,7 +27,7 @@ module BatchFactory
     end
     
     def parse_column_bounds
-      @column_bounds = @worksheet.first_column..@worksheet.last_column
+      @column_bounds = (@worksheet.first_column-1)..(@worksheet.last_column-1)
     end
     
     def parse_data_rows
