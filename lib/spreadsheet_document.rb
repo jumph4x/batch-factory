@@ -9,11 +9,11 @@ class SpreadsheetDocument
       when 'ods'
         Roo::Openoffice.new(file_name)
       else
-        Roo::Csv.new(file_name)
+        Roo::CSV.new(file_name)
     end
     @current_sheet = @spreadsheet.sheets[sheet_number]
   end
-  
+
   def method_missing(method, *args, &block)
     if @spreadsheet.respond_to? method.to_sym
       args << @current_sheet
