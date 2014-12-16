@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = "Assumes first row to be keys and returns hashes for consecutive rows"
   s.homepage    = "https://github.com/jumph4x/batch-factory"
 
-  s.add_dependency 'roo', '~> 1.10.3'
+  s.add_dependency 'roo', '~> 1.10'
   s.add_dependency 'activesupport'
   s.add_development_dependency 'rspec', '~> 2.10'
 end
