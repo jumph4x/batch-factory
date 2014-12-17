@@ -9,11 +9,11 @@ require 'batch_factory/hashed_worksheet'
 
 module BatchFactory
   class << self
-    def from_file file_location
+    def from_file file_location, keys = nil
       parser = BatchFactory::Parser.new
-      parser.open file_location
+      parser.open file_location, 0, keys
       parser.parse!
-      
+
       parser.hashed_worksheet
     end
   end
