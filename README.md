@@ -15,6 +15,13 @@ require 'batch_factory'
 hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls'
 ```
 
+Or if you the data doesn't include headings, add them by passing an
+optional array:
+```ruby
+hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls',
+[:name, :address, :phone]
+```
+
 Then, display headings from row 1 that BatchFactory used as hash keys for each row:
 ```ruby
 hash_worksheet.keys
