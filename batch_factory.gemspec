@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.test_files  = Dir.glob("{spec,test}/**/*.rb")
 
   s.name        = "batch_factory"
-  s.version     = BatchFactory::VERSION
+  s.version     = BatchFactory::VERSION::STRING
   s.authors     = ["Denis Ivanov"]
   s.email       = ["visible@jumph4x.net"]
 
@@ -15,5 +15,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'roo', '~> 1.10'
   s.add_dependency 'activesupport'
+
   s.add_development_dependency 'rspec', '~> 2.10'
+  s.add_development_dependency 'rspec-its'
 end
+
