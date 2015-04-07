@@ -37,7 +37,7 @@ describe BatchFactory::Parser do
 
     context 'when parsing second worksheet' do
       before do
-        parser.open VALID_SPREADSHEET, 1
+        parser.open VALID_SPREADSHEET, sheet_number: 1
         parser.parse!
       end
 
@@ -60,6 +60,6 @@ describe BatchFactory::Parser do
         worksheet.keys.should == parser.heading_keys
       end
     end
-
   end
 end
+

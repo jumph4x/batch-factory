@@ -1,6 +1,7 @@
 module BatchFactory
   class Parser
-    attr_accessor :worksheet, :user_heading_keys, :heading_keys, :column_bounds, :row_hashes
+    attr_accessor :worksheet, :user_heading_keys,
+      :heading_keys, :column_bounds, :row_hashes
 
     def initialize
       @heading_keys = []
@@ -8,9 +9,9 @@ module BatchFactory
       @row_hashes = []
     end
 
-    def open(file_location, sheet_number = 0, user_keys = nil)
-      @worksheet = SpreadsheetDocument.new(file_location, sheet_number)
-      @user_heading_keys = user_keys
+    def open(file_location, options = {})
+      @worksheet = SpreadsheetDocument.new(file_location, options)
+      @user_heading_keys = options[:keys]
     end
 
     def parse!
