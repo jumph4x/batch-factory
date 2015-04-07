@@ -1,3 +1,11 @@
 module BatchFactory
-  VERSION = '0.0.6'
+  module VERSION
+    MAJOR = 0
+    MINOR = 0
+    PATCH = 6
+    SUFFIX = nil
+
+    STRING = [MAJOR, MINOR, PATCH, SUFFIX].compact.join('.')
+  end
 end
+

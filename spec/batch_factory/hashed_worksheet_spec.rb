@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe BatchFactory::HashedWorksheet do
-
   context 'w/ instance methods' do
     let(:worksheet) do
       parser = BatchFactory::Parser.new
@@ -27,3 +26,4 @@ describe BatchFactory::HashedWorksheet do
   end
 
 end
+
