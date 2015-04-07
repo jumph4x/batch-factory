@@ -1,7 +1,9 @@
 require 'roo'
 class SpreadsheetDocument
-  def initialize(file_name, sheet_number)
-    @spreadsheet = case file_name.split('.').last
+  def initialize(file_name, sheet_number, options = {})
+    filetype = options[:filetype] || detect_filetype(file_name)
+
+    @spreadsheet = case filetype
       when 'xls'
         Roo::Excel.new(file_name)
       when 'xlsx'
@@ -22,4 +24,11 @@ class SpreadsheetDocument
       super
     end
   end
+
+  private
+
+  def detect_filetype(file_name)
+    File.extname(file_name)
+  end
 end
+
