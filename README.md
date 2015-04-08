@@ -1,6 +1,6 @@
 # Batch Factory
 
-Built on top of the roo gem for easy abstraction of Excel and OpenOffice spreadsheets as tabular data input. Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys. 
+Built on top of the [roo](https://github.com/roo-rb/roo) gem for easy abstraction of Excel and OpenOffice spreadsheets as tabular data input. Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys. 
 
 ## Uses
 
@@ -14,12 +14,25 @@ First,
 require 'batch_factory'
 hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls'
 ```
+To open particular sheet specify the `sheet_number` option.
+By default it opens the first sheet (`sheet_number`: 0).
+E.g this will open the second sheet:
+```ruby
+hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls', sheet_number: 1
+```
 
-Or if you the data doesn't include headings, add them by passing an
+If your data doesn't include headings, add them by passing an
 optional array:
 ```ruby
 hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls',
-[:name, :address, :phone]
+  keys: [:name, :address, :phone]
+```
+
+Spreadsheet type is detected by the file extension (`xls`, `xlsx`, `ods`),
+files without extension considered `csv`.
+Also, this can be specified explicitly with the `filetype` option:
+```ruby
+hash_worksheet = BatchFactory.from_file 'http://somecloud.com/path/spreadsheet', filetype: 'xls'
 ```
 
 Then, display headings from row 1 that BatchFactory used as hash keys for each row:
