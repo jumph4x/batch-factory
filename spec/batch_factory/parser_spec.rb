@@ -6,7 +6,7 @@ describe BatchFactory::Parser do
   context 'w/ instance methods' do
     it 'should open and parse a valid file' do
       parser.open VALID_SPREADSHEET
-      parser.worksheet.should_not be_nil
+      expect(parser.worksheet).not_to be_nil
     end
 
     context 'when parsing default worksheet' do
@@ -16,22 +16,22 @@ describe BatchFactory::Parser do
       end
 
       it 'should parse column information' do
-        parser.column_bounds.should == (0..5)
+        expect(parser.column_bounds).to eq(0..5)
       end
 
       it 'should parse the heading keys' do
-        parser.heading_keys.should == ['name', 'address', nil, 'country', 'bid', 'age']
+        expect(parser.heading_keys).to eq(['name', 'address', nil, 'country', 'bid', 'age'])
       end
 
       it 'should parse the data rows' do
-        parser.row_hashes[0]['age'].should == 50
-        parser.row_hashes.size.should == 1
+        expect(parser.row_hashes[0]['age']).to eq 50
+        expect(parser.row_hashes.size).to eq 1
       end
 
       it 'should return a hashed worksheet' do
         worksheet = parser.hashed_worksheet
-        worksheet.rows.should == parser.row_hashes
-        worksheet.keys.should == parser.heading_keys
+        expect(worksheet.rows).to eq(parser.row_hashes)
+        expect(worksheet.keys).to eq(parser.heading_keys)
       end
     end
 
@@ -42,22 +42,22 @@ describe BatchFactory::Parser do
       end
 
       it 'should parse column information' do
-        parser.column_bounds.should == (2..7)
+        expect(parser.column_bounds).to eq(2..7)
       end
 
       it 'should parse the heading keys' do
-        parser.heading_keys.should == ['name', 'address', nil, 'country', 'bid', 'age']
+        expect(parser.heading_keys).to eq(['name', 'address', nil, 'country', 'bid', 'age'])
       end
 
       it 'should parse the data rows' do
-        parser.row_hashes[0]['age'].should == 50
-        parser.row_hashes.size.should == 1
+        expect(parser.row_hashes[0]['age']).to eq 50
+        expect(parser.row_hashes.size).to eq 1
       end
 
       it 'should return a hashed worksheet' do
         worksheet = parser.hashed_worksheet
-        worksheet.rows.should == parser.row_hashes
-        worksheet.keys.should == parser.heading_keys
+        expect(worksheet.rows).to eq(parser.row_hashes)
+        expect(worksheet.keys).to eq(parser.heading_keys)
       end
     end
   end
