@@ -10,20 +10,19 @@ describe BatchFactory::HashedWorksheet do
     end
 
     it 'should return an array of heading keys' do
-      worksheet.keys[0].should == 'name'
+      expect(worksheet.keys[0]).to eq 'name'
     end
 
     it 'should return an array of data hashes' do
-      worksheet.rows[0][:age].should == 50
+      expect(worksheet.rows[0][:age]).to eq 50
     end
 
     it 'should iterate over the rows' do
-      worksheet.size.should == 1
+      expect(worksheet.size).to eq 1
       worksheet.each_with_index do |hash, index|
-        hash.should == worksheet.rows[index]
+        expect(hash).to eq(worksheet.rows[index])
       end
     end
   end
-
 end
 
