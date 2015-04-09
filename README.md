@@ -68,3 +68,8 @@ gem 'batch_factory', :git => 'git://github.com/jumph4x/batch-factory.git'
 ## Why?
 
 Because the business world still runs on spreadsheets and Excel. This allows executives to effectively interact with your software library or webapp. 
+
+## Cred
+
+A project by [Downshift Labs](http://downshiftlabs.com), Ruby on Rails,
+Performance tuning and Spree Commerce projects.
