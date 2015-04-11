@@ -1,6 +1,7 @@
 # Batch Factory
 
-Built on top of the [roo](https://github.com/roo-rb/roo) gem for easy abstraction of Excel and OpenOffice spreadsheets as tabular data input. Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys. 
+Built on top of the [roo](https://github.com/roo-rb/roo) gem for easy abstraction of Excel and OpenOffice spreadsheets as tabular data input.
+Assumes the first row to be headings with keys and forms clean Ruby hashmaps for all consecutive rows using cells as values for respective keys.
 
 ## Uses
 
@@ -12,42 +13,42 @@ Common scenarios include:
 First,
 ```ruby
 require 'batch_factory'
-hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls'
+rows = BatchFactory.from_file 'path/to/some/spreadsheet.xls'
 ```
 To open particular sheet specify the `sheet_number` option.
 By default it opens the first sheet (`sheet_number`: 0).
 E.g this will open the second sheet:
 ```ruby
-hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls', sheet_number: 1
+rows = BatchFactory.from_file 'path/to/some/spreadsheet.xls', sheet_number: 1
 ```
 
 If your data doesn't include headings, add them by passing an
 optional array:
 ```ruby
-hash_worksheet = BatchFactory.from_file 'path/to/some/spreadsheet.xls',
+rows = BatchFactory.from_file 'path/to/some/spreadsheet.xls',
   keys: [:name, :address, :phone]
 ```
 
 Spreadsheet type is detected by the file extension (`xls`, `xlsx`, `ods`),
 files without extension considered `csv`.
-Also, this can be specified explicitly with the `filetype` option:
+Also, this can be specified explicitly with the `extension` option:
 ```ruby
-hash_worksheet = BatchFactory.from_file 'http://somecloud.com/path/spreadsheet', filetype: 'xls'
+rows = BatchFactory.from_file 'http://somecloud.com/path/spreadsheet', extension: 'xls'
 ```
 
 Then, display headings from row 1 that BatchFactory used as hash keys for each row:
 ```ruby
-hash_worksheet.keys
+rows.keys
 ```
 
 Show all extracted hashes (one per row starting with row 2):
 ```ruby
-hash_worksheet.rows
+rows.rows
 ```
 
 Iterate over it like an array (or enumerable). Or, in fact, any method that either respond to:
 ```ruby
-hash_worksheet.each do |hash_row|
+rows.each do |hash_row|
   puts hash_row.inspect
 end
 ```
